@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas Liga de Basket</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient( #000000);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            min-height: 800px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f5f5f5;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            background: #f5f5f5;
+            border: none;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab:hover {
+            background: #e8e8e8;
+        }
+
+        .tab.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+            color: #667eea;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        tbody tr {
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+
+        tbody tr:hover {
+            background: #f8f9ff;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        tbody tr:nth-child(even):hover {
+            background: #f8f9ff;
+        }
+
+        .qualified {
+            font-weight: bold;
+        }
+
+        .relegated {
+            background: #ffe6e6 !important;
+        }
+
+        .relegated:hover {
+            background: #ffd6d6 !important;
+        }
+
+        .team-details {
+            padding: 20px;
+        }
+
+        .team-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .team-header h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .back-button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #f0f0f0;
+        }
+
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #f5576c;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+
+            .tab {
+                font-size: 0.9em;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.jpeg" alt="Logo" class="logo">
+            <h1>🏀 Estadísticas Liga de Basket</h1>
+            <p>Datos actualizados en tiempo real</p>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('standings')">Posiciones</button>
+            <button class="tab" onclick="switchTab('fixtures')">Fixture</button>
+            <button class="tab" onclick="switchTab('teams')">Equipos</button>
+        </div>
+
+        <div id="standings-tab" class="tab-content active">
+            <div class="loading">Cargando tabla de posiciones...</div>
+        </div>
+
+        <div id="fixtures-tab" class="tab-content">
+            <div class="loading">Cargando fixture...</div>
+        </div>
+
+        <div id="teams-tab" class="tab-content">
+            <div class="loading">Cargando equipos...</div>
+        </div>
+    </div>
+
+    <script>
+        const STANDINGS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSf2G21253_685NXqeF1lU2SQOewQf0I6pOSQY3quiynx8TuUomfdp-MxIyuoFhAapOwpb0WL_9RQgU/pub?gid=2137138777&single=true&output=csv';
+        const FIXTURES_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSf2G21253_685NXqeF1lU2SQOewQf0I6pOSQY3quiynx8TuUomfdp-MxIyuoFhAapOwpb0WL_9RQgU/pub?gid=0&single=true&output=csv';
+        const TEAMS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSf2G21253_685NXqeF1lU2SQOewQf0I6pOSQY3quiynx8TuUomfdp-MxIyuoFhAapOwpb0WL_9RQgU/pub?gid=8327189&single=true&output=csv';
+
+        let teamsData = [];
+
+        function parseCSV(csvText) {
+            const rows = csvText.split('\n').map(row => {
+                const cells = [];
+                let cell = '';
+                let inQuotes = false;
+                
+                for (let i = 0; i < row.length; i++) {
+                    const char = row[i];
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        cells.push(cell.trim());
+                        cell = '';
+                    } else {
+                        cell += char;
+                    }
+                }
+                cells.push(cell.trim());
+                return cells;
+            });
+            return rows;
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+
+        async function loadStandings() {
+            try {
+                const response = await fetch(STANDINGS_CSV_URL);
+                const csvText = await response.text();
+                const rows = parseCSV(csvText);
+
+                const headers = rows[0];
+                const data = rows.slice(1).filter(row => row.some(cell => cell));
+
+                let html = '<div class="table-container"><table><thead><tr>';
+                headers.forEach(header => {
+                    html += `<th>${header}</th>`;
+                });
+                html += '</tr></thead><tbody>';
+
+                data.forEach((row, index) => {
+                    const position = index + 1;
+                    let rowClass = '';
+                    if (position <= 8) {
+                        rowClass = 'qualified';
+                    } else if (position >= 9) {
+                        rowClass = 'relegated';
+                    }
+                    html += `<tr class="${rowClass}">`;
+                    row.forEach(cell => {
+                        html += `<td>${cell}</td>`;
+                    });
+                    html += '</tr>';
+                });
+
+                html += '</tbody></table></div>';
+                document.getElementById('standings-tab').innerHTML = html;
+            } catch (error) {
+                document.getElementById('standings-tab').innerHTML = 
+                    '<div class="error">Error al cargar la tabla de posiciones. Por favor, intenta de nuevo más tarde.</div>';
+                console.error('Error:', error);
+            }
+        }
+
+        async function loadFixtures() {
+            try {
+                const response = await fetch(FIXTURES_CSV_URL);
+                const csvText = await response.text();
+                const rows = parseCSV(csvText);
+
+                const headers = rows[0];
+                const data = rows.slice(1).filter(row => row.some(cell => cell));
+
+                let html = '<div class="table-container"><table><thead><tr>';
+                headers.forEach(header => {
+                    html += `<th>${header}</th>`;
+                });
+                html += '</tr></thead><tbody>';
+
+                data.forEach(row => {
+                    html += '<tr>';
+                    row.forEach(cell => {
+                        html += `<td>${cell}</td>`;
+                    });
+                    html += '</tr>';
+                });
+
+                html += '</tbody></table></div>';
+                document.getElementById('fixtures-tab').innerHTML = html;
+            } catch (error) {
+                document.getElementById('fixtures-tab').innerHTML = 
+                    '<div class="error">Error al cargar el fixture. Por favor, intenta de nuevo más tarde.</div>';
+                console.error('Error:', error);
+            }
+        }
+
+        async function loadTeams() {
+            try {
+                const response = await fetch(TEAMS_CSV_URL);
+                const csvText = await response.text();
+                const rows = parseCSV(csvText);
+
+                const headers = rows[0];
+                const data = rows.slice(1).filter(row => row.some(cell => cell));
+
+                teamsData = data.map(row => {
+                    const team = {};
+                    headers.forEach((header, index) => {
+                        team[header] = row[index] || '';
+                    });
+                    return team;
+                });
+
+                const teamNames = [...new Set(teamsData.map(player => player[headers[0]]))];
+
+                let html = '<div class="table-container"><h2 style="margin-bottom: 20px; color: #667eea;">Selecciona un equipo</h2><table><thead><tr><th>Equipo</th></tr></thead><tbody>';
+
+                teamNames.forEach(teamName => {
+                    if (teamName) {
+                        html += `<tr onclick="showTeamDetails('${teamName.replace(/'/g, "\\'")}')"><td>${teamName}</td></tr>`;
+                    }
+                });
+
+                html += '</tbody></table></div>';
+                document.getElementById('teams-tab').innerHTML = html;
+            } catch (error) {
+                document.getElementById('teams-tab').innerHTML = 
+                    '<div class="error">Error al cargar los equipos. Por favor, intenta de nuevo más tarde.</div>';
+                console.error('Error:', error);
+            }
+        }
+
+        function showTeamDetails(teamName) {
+            const teamPlayers = teamsData.filter(player => player[Object.keys(player)[0]] === teamName);
+            
+            if (teamPlayers.length === 0) return;
+
+            const headers = Object.keys(teamPlayers[0]);
+
+            let html = '<div class="team-details">';
+            html += '<button class="back-button" onclick="loadTeams()">← Volver a equipos</button>';
+            html += `<div class="team-header"><h2>${teamName}</h2><p>${teamPlayers.length} jugadores</p></div>`;
+            html += '<div class="table-container"><table><thead><tr>';
+
+            headers.forEach(header => {
+                html += `<th>${header}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+
+            teamPlayers.forEach(player => {
+                html += '<tr>';
+                headers.forEach(header => {
+                    html += `<td>${player[header]}</td>`;
+                });
+                html += '</tr>';
+            });
+
+            html += '</tbody></table></div></div>';
+            document.getElementById('teams-tab').innerHTML = html;
+        }
+
+        loadStandings();
+        loadFixtures();
+        loadTeams();
+    </script>
+</body>
+</html>
+
+
+
