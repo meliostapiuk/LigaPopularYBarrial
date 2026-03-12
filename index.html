@@ -12,8 +12,8 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient( #000000);
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(180deg, #0a0a1f 0%, #1a0a2e 50%, #2d1b3d 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -21,35 +21,74 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
+            background: rgba(10, 10, 31, 0.9);
             border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 0 40px rgba(255, 0, 255, 0.3), 0 0 80px rgba(0, 255, 255, 0.2);
             overflow: hidden;
             min-height: 800px;
+            border: 2px solid #ff00ff;
         }
 
         header {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
+            background: linear-gradient(135deg, #ff00ff 0%, #00ffff 100%);
+            color: #0a0a1f;
             padding: 30px;
             text-align: center;
+            box-shadow: 0 5px 30px rgba(255, 0, 255, 0.5);
         }
 
         .logo {
-            width: 150px;
+            width: 385px;
             height: auto;
-            margin-bottom: 20px;
+            margin-bottom: 0px;
+            filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.9));
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .lpb-title {
+            width: 600px;
+            height: auto;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8));
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+        }
+
+        .sponsor {
+            width: 250px;
+            height: auto;
+            margin-top: 15px;
+            filter: drop-shadow(0 0 15px rgba(255, 0, 255, 0.6));
+            display: inline-block;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .sponsors-container {
+            text-align: center;
+            margin-top: 15px;
         }
 
         .tabs {
             display: flex;
-            background: #f5f5f5;
-            border-bottom: 2px solid #ddd;
+            background: #1a0a2e;
+            border-bottom: 3px solid #ff00ff;
         }
 
         .tab {
@@ -57,21 +96,29 @@
             padding: 15px;
             text-align: center;
             cursor: pointer;
-            background: #f5f5f5;
+            background: #1a0a2e;
             border: none;
             font-size: 1em;
             font-weight: 600;
             transition: all 0.3s ease;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .tab:hover {
-            background: #e8e8e8;
+            background: #2d1b3d;
+            box-shadow: inset 0 0 20px rgba(255, 0, 255, 0.3);
         }
 
         .tab.active {
-            background: white;
-            color: #667eea;
-            border-bottom: 3px solid #667eea;
+            background: #2d1b3d;
+            color: #ff00ff;
+            text-shadow: 0 0 15px rgba(255, 0, 255, 1);
+            border-bottom: 3px solid #00ffff;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
         }
 
         .tab-content {
@@ -86,7 +133,8 @@
             text-align: center;
             padding: 50px;
             font-size: 1.2em;
-            color: #667eea;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
         }
 
         .table-container {
@@ -97,55 +145,63 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
+            background: rgba(26, 10, 46, 0.8);
         }
 
         thead {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #ff00ff 0%, #00ffff 100%);
+            color: #0a0a1f;
         }
 
         th {
             padding: 15px;
             text-align: left;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             font-size: 0.9em;
-            letter-spacing: 0.5px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
 
         td {
             padding: 12px 15px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+            color: #00ffff;
         }
 
         tbody tr {
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
         }
 
         tbody tr:hover {
-            background: #f8f9ff;
+            background: rgba(255, 0, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
         }
 
         tbody tr:nth-child(even) {
-            background: #fafafa;
+            background: rgba(45, 27, 61, 0.5);
         }
 
         tbody tr:nth-child(even):hover {
-            background: #f8f9ff;
+            background: rgba(255, 0, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
         }
 
         .qualified {
             font-weight: bold;
+            color: #ff00ff;
+            text-shadow: 0 0 5px rgba(255, 0, 255, 0.8);
         }
 
         .relegated {
-            background: #ffe6e6 !important;
+            background: rgba(255, 0, 100, 0.3) !important;
+            box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.5);
         }
 
         .relegated:hover {
-            background: #ffd6d6 !important;
+            background: rgba(255, 0, 100, 0.4) !important;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
         }
 
         .team-details {
@@ -153,39 +209,97 @@
         }
 
         .team-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #ff00ff 0%, #00ffff 100%);
+            color: #0a0a1f;
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.6);
         }
 
         .team-header h2 {
             font-size: 2em;
             margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .back-button {
-            background: white;
-            color: #667eea;
+            background: linear-gradient(135deg, #ff00ff 0%, #00ffff 100%);
+            color: #0a0a1f;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 15px;
             transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            font-family: 'Courier New', monospace;
         }
 
         .back-button:hover {
-            background: #f0f0f0;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+            transform: scale(1.05);
         }
 
         .error {
             text-align: center;
             padding: 50px;
-            color: #f5576c;
+            color: #ff00ff;
             font-size: 1.2em;
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.8);
+        }
+
+        .date-group {
+            background: rgba(45, 27, 61, 0.6);
+            border: 2px solid #ff00ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+        }
+
+        .date-title {
+            color: #00ffff;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 1);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        #fixtures-tab td {
+            font-weight: bold;
+        }
+
+        .about-content {
+            padding: 40px;
+            color: #00ffff;
+            line-height: 1.8;
+        }
+
+        .about-content h2 {
+            color: #ff00ff;
+            text-shadow: 0 0 15px rgba(255, 0, 255, 1);
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            text-align: justify;
+        }
+
+        .about-content strong {
+            color: #ff00ff;
+            text-shadow: 0 0 5px rgba(255, 0, 255, 0.6);
         }
 
         @media (max-width: 768px) {
@@ -208,15 +322,19 @@
 <body>
     <div class="container">
         <header>
-            <img src="logo.jpeg" alt="Logo" class="logo">
-            <h1>🏀 Estadísticas Liga de Basket</h1>
-            <p>Datos actualizados en tiempo real</p>
+            <img src="logo.png" alt="Logo" class="logo">
+            <img src="LPB.png" alt="LPB" class="lpb-title">
+            <div class="sponsors-container">
+                <img src="Sponsor1.png" alt="Sponsor 1" class="sponsor">
+                <img src="Sponsor2.png" alt="Sponsor 2" class="sponsor">
+            </div>
         </header>
         
         <div class="tabs">
             <button class="tab active" onclick="switchTab('standings')">Posiciones</button>
             <button class="tab" onclick="switchTab('fixtures')">Fixture</button>
             <button class="tab" onclick="switchTab('teams')">Equipos</button>
+            <button class="tab" onclick="switchTab('about')">Quienes Somos</button>
         </div>
 
         <div id="standings-tab" class="tab-content active">
@@ -229,6 +347,27 @@
 
         <div id="teams-tab" class="tab-content">
             <div class="loading">Cargando equipos...</div>
+        </div>
+
+        <div id="about-tab" class="tab-content">
+            <div class="about-content">
+                <h2>Quienes Somos</h2>
+                <p>La Liga Popular Barrial de Básquetbol (LPB) nace en Ezeiza como un proyecto comunitario que busca fortalecer la identidad deportiva de nuestros barrios y expandirla hacia toda la región. Con la participación de 10 equipos provenientes de distintos barrios y localidades, la LPB se presenta como un torneo competitivo y organizado, pensado para darle visibilidad, crecimiento y desarrollo al básquet popular.</p>
+                
+                <p>La primera edición contará con una ronda única de todos contra todos, garantizando igualdad de condiciones y transparencia en la competencia. Al finalizar esta etapa, los equipos mejor posicionados accederán a una fase de playoffs, donde se definirá al campeón a través de cruces eliminatorios que prometen encuentros intensos y vibrantes.</p>
+                
+                <p>La liga se desarrollará bajo estándares organizativos oficiales, incluyendo:</p>
+                
+                <p><strong>Jueces habilitados</strong>, que asegurarán el cumplimiento de las reglas y el fair play en cada partido.</p>
+                
+                <p><strong>Mesa oficial</strong>, encargada del control técnico y estadístico de cada encuentro.</p>
+                
+                <p><strong>Cobertura visual de las jornadas</strong>, que permitirá registrar y difundir los partidos, fortaleciendo la presencia y el alcance del básquet barrial en la comunidad.</p>
+                
+                <p>Además, todos los encuentros de la LPB se disputarán en una cancha de parque ubicada en el Club Ezeiza, un espacio emblemático del deporte local que funcionará como sede de la competencia y punto de encuentro para jugadores, equipos y vecinos.</p>
+                
+                <p>La LPB está enfocada en el desarrollo de los equipos barriales, brindando la oportunidad de competir en un entorno lo más profesional posible, para que cada jugador y cada institución puedan vivir la experiencia de formar parte de una liga organizada, seria y representativa del básquet de barrio.</p>
+            </div>
         </div>
     </div>
 
@@ -266,7 +405,16 @@
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
-            event.target.classList.add('active');
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                if (tab.textContent.toLowerCase().includes(tabName.toLowerCase()) || 
+                    (tabName === 'standings' && tab.textContent.includes('Posiciones')) ||
+                    (tabName === 'fixtures' && tab.textContent.includes('Fixture')) ||
+                    (tabName === 'teams' && tab.textContent.includes('Equipos')) ||
+                    (tabName === 'about' && tab.textContent.includes('Quienes Somos'))) {
+                    tab.classList.add('active');
+                }
+            });
             document.getElementById(`${tabName}-tab`).classList.add('active');
         }
 
@@ -287,13 +435,14 @@
 
                 data.forEach((row, index) => {
                     const position = index + 1;
+                    const teamName = row[0];
                     let rowClass = '';
                     if (position <= 8) {
                         rowClass = 'qualified';
                     } else if (position >= 9) {
                         rowClass = 'relegated';
                     }
-                    html += `<tr class="${rowClass}">`;
+                    html += `<tr class="${rowClass}" onclick="showTeamDetailsFromStandings('${teamName.replace(/'/g, "\\'")}')">`;
                     row.forEach(cell => {
                         html += `<td>${cell}</td>`;
                     });
@@ -318,21 +467,42 @@
                 const headers = rows[0];
                 const data = rows.slice(1).filter(row => row.some(cell => cell));
 
-                let html = '<div class="table-container"><table><thead><tr>';
-                headers.forEach(header => {
-                    html += `<th>${header}</th>`;
-                });
-                html += '</tr></thead><tbody>';
-
+                const dateIndex = headers.findIndex(h => h.toLowerCase().includes('fecha'));
+                
+                const groupedByDate = {};
                 data.forEach(row => {
-                    html += '<tr>';
-                    row.forEach(cell => {
-                        html += `<td>${cell}</td>`;
-                    });
-                    html += '</tr>';
+                    const date = row[dateIndex] || 'Sin fecha';
+                    if (!groupedByDate[date]) {
+                        groupedByDate[date] = [];
+                    }
+                    groupedByDate[date].push(row);
                 });
 
-                html += '</tbody></table></div>';
+                let html = '<div class="table-container">';
+                let fechaCounter = 1;
+                
+                Object.keys(groupedByDate).forEach(date => {
+                    html += '<div class="date-group">';
+                    html += `<h3 class="date-title">Fecha ${fechaCounter}</h3>`;
+                    html += '<table><thead><tr>';
+                    headers.forEach(header => {
+                        html += `<th>${header}</th>`;
+                    });
+                    html += '</tr></thead><tbody>';
+
+                    groupedByDate[date].forEach(row => {
+                        html += '<tr>';
+                        row.forEach(cell => {
+                            html += `<td>${cell}</td>`;
+                        });
+                        html += '</tr>';
+                    });
+
+                    html += '</tbody></table></div>';
+                    fechaCounter++;
+                });
+
+                html += '</div>';
                 document.getElementById('fixtures-tab').innerHTML = html;
             } catch (error) {
                 document.getElementById('fixtures-tab').innerHTML = 
@@ -358,14 +528,12 @@
                     return team;
                 });
 
-                const teamNames = [...new Set(teamsData.map(player => player[headers[0]]))];
+                const uniqueTeams = [...new Set(teamsData.map(player => player[headers[0]]))];
 
-                let html = '<div class="table-container"><h2 style="margin-bottom: 20px; color: #667eea;">Selecciona un equipo</h2><table><thead><tr><th>Equipo</th></tr></thead><tbody>';
+                let html = '<div class="table-container"><h2 style="margin-bottom: 20px; color: #00ffff; text-shadow: 0 0 15px rgba(0, 255, 255, 1); text-align: center; text-transform: uppercase;">Selecciona un equipo</h2><table><thead><tr><th>Equipo</th></tr></thead><tbody>';
 
-                teamNames.forEach(teamName => {
-                    if (teamName) {
-                        html += `<tr onclick="showTeamDetails('${teamName.replace(/'/g, "\\'")}')"><td>${teamName}</td></tr>`;
-                    }
+                uniqueTeams.forEach(team => {
+                    html += `<tr onclick="showTeamDetails('${team.replace(/'/g, "\\'")}')""><td>${team}</td></tr>`;
                 });
 
                 html += '</tbody></table></div>';
@@ -377,26 +545,48 @@
             }
         }
 
+        function showTeamDetailsFromStandings(teamName) {
+            if (teamsData.length === 0) {
+                setTimeout(() => showTeamDetailsFromStandings(teamName), 500);
+                return;
+            }
+            switchTab('teams');
+            setTimeout(() => {
+                const firstHeader = Object.keys(teamsData[0])[0];
+                const normalizedTeamName = teamName.trim().toLowerCase();
+                const matchingTeam = teamsData.find(player => 
+                    player[firstHeader].trim().toLowerCase() === normalizedTeamName
+                );
+                
+                if (matchingTeam) {
+                    showTeamDetails(matchingTeam[firstHeader]);
+                } else {
+                    showTeamDetails(teamName);
+                }
+            }, 100);
+        }
+
         function showTeamDetails(teamName) {
             const teamPlayers = teamsData.filter(player => player[Object.keys(player)[0]] === teamName);
             
             if (teamPlayers.length === 0) return;
 
             const headers = Object.keys(teamPlayers[0]);
+            const filteredHeaders = headers.slice(1);
 
             let html = '<div class="team-details">';
             html += '<button class="back-button" onclick="loadTeams()">← Volver a equipos</button>';
             html += `<div class="team-header"><h2>${teamName}</h2><p>${teamPlayers.length} jugadores</p></div>`;
             html += '<div class="table-container"><table><thead><tr>';
 
-            headers.forEach(header => {
+            filteredHeaders.forEach(header => {
                 html += `<th>${header}</th>`;
             });
             html += '</tr></thead><tbody>';
 
             teamPlayers.forEach(player => {
                 html += '<tr>';
-                headers.forEach(header => {
+                filteredHeaders.forEach(header => {
                     html += `<td>${player[header]}</td>`;
                 });
                 html += '</tr>';
@@ -412,6 +602,3 @@
     </script>
 </body>
 </html>
-
-
-
